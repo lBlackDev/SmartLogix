@@ -1,0 +1,81 @@
+
+
+server:
+  port: 8080
+
+spring:
+  application:
+    name: api-gateway
+    cloud:
+      inetutils:
+        preferred-networks:
+          - 127.0.0.1
+
+  cloud:
+    gateway:
+      server:
+        webflux:
+          routes:
+        #Autorizador
+          - id: auth-service
+            uri: lb://auth-service
+            predicates:
+              - Path=/api/auth/**
+
+        # Servicio de Inventario
+          - id: servicio-inventario
+            uri: lb://servicio-inventario
+            predicates:
+              - Path=/api/inventario/**
+
+        # Servicio de Ordenes
+          - id: servicio-orden
+            uri: lb://servicio-orden
+            predicates:
+              - Path=/api/orden/**
+
+        # Servicio de Pedidos
+          - id: servicio-pedidos
+            uri: lb://servicio-pedidos
+            predicates:
+              - Path=/api/pedidos/**
+
+        #BFF Service
+          - id: bff-service
+            uri: lb://bff-service
+            predicates:
+              - Path=/api/bff/**
+
+
+eureka:
+  client:
+    service-url:
+      defaultZone: http://localhost:8761/eureka/
+  instance:
+    prefer-ip-address: true
+    hotsname: localhost
+    ip-address: 127.0.0.1
+
+# Swagger
+springdoc:
+  swagger-ui:
+    path: /swagger-ui.html
+    disable-swagger-default-url: true
+  api-docs:
+    enabled: true
+    path: /v3/api-docs
+  packages-to-scan: com.smartlogix.gateway.controller
+
+
+#actuador
+management:
+  endpoint:
+    web:
+      exposure:
+        include: health, info, gateway
+
+
+#jwt secret
+jwt:
+  secret: ultrasecreto123
+

@@ -31,10 +31,3 @@ build/
 
 ### VS Code ###
 .vscode/
-
-#Extras
-* text=auto
-*.cmd text eol=crlf
-*.sh text eol=lf
-mvnw text eol=lf
-mvnw.cmd text eol=crlf

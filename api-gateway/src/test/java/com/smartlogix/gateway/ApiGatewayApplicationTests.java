@@ -1,10 +1,10 @@
-package com.duoc.smartlogix;
+package com.smartlogix.gateway;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 
 @SpringBootTest
-class SmartlogixApplicationTests {
+class ApiGatewayApplicationTests {
 
     @Test
     void contextLoads() {
